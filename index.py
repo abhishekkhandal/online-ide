@@ -1,3 +1,9 @@
+#!/usr/bin/python2
+import commands,cgi
+print "content-type: text/html"
+print ""
+
+print"""
 <!DOCTYPE html>
 <html>
 
@@ -68,7 +74,7 @@
                 <div class="col-md-6" style="margin:5% 0% 5% 0%;width:100%;height:100%;"><iframe src="https://blog.kabhishek.in" style="width:100%;height:500px"></iframe></div>
             </div>
             <div class="row" style="margin:0px;height:69px;width:100%;">
-                <div class="col" style="width:100%;"><button class="btn btn-primary" type="button" style="font-size:21px;margin:0% 0% 5% 45%;padding:8px 32px;background-color:#82cdfe;width:100px;">GO</button></div>
+                <div class="col" style="width:100%;"><button class="btn btn-primary" type="button" style="font-size:18px;margin:0% 0% 5% 45%;padding:6px 28px;background-color:#82cdfe;width:100px;">GO</button></div>
             </div>
         </div>
     </div>
@@ -84,3 +90,4 @@
 </body>
 
 </html>
+"""
