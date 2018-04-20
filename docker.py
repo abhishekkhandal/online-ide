@@ -26,8 +26,8 @@ def Docker_RMI():
 	except:
 		print ("")		
 
-def CCPP(lang):
-		cpp_file = code_file + ".{lang}".format(lang = "c" if lang == "C" else "cpp")
+def Lang_C_CPP(lang):
+		cpp_file = code_file + ".{lang}".format(lang = lang)
 		cpp_executable = cpp_file.split('.')[0] + ".o"
 		
 		CPP_Program = """
@@ -63,21 +63,34 @@ def CCPP(lang):
 		
 		call(["gotty -w --term PaaS docker run -it --rm {label}:latest ".format(label = code_file)],shell=True)
 
-def Lang
+def Lang_Python(ver):
+		# To use Python2 or 3 Docker container
+		Dockerfile = """
+		FROM python:{ver}
+		COPY {File} /usr/src/mypy
+		WORKDIR /usr/src/mypy
+		CMD ["{PyVer} {File}"]
+		""".format(File = File, ver = ver, PyVer = "Python2" if ver == 2 else "Python3")	
+		print (Dockerfile)
 
-def Process():
-	if (lang == "C" or lang == "CPP"):
-		 
-
-		
-	elif (lang == "Python2" or lang == "Python3"):
-		
 
 def ttyOverBrowser(port, docker_cmd):
 	subprocess.getoutput("ttyd -p {port} --once {cmd} &".format(port = port, cmd = docker_cmd))
+
+def choice():
+	# lang test
+	# lang = "C"
+	
+	if (lang == "C" or lang == "CPP"):
+		l = "c" if lang == "C" else "cpp"
+		Lang_C_CPP(l)
+	elif (lang == "Python2" or lang == "Python3"):
+		ver = ("{ver}").format(ver = 2 if lang == "Python2" else "3")
+		Lang_Python(ver)
 
 def main():
 	Docker_RMI()
 	Process()
 
 main()
+
