@@ -10,27 +10,25 @@ fs = cgi.FieldStorage()
 lang = "CPP"
 
 # Filename: Random number between 1 and 10^19
-PROGRAM_File = str(random.randint(1,10**19))
+code_file = str(random.randint(1,10**19))
 
 def Docker_RMI():
 	# Clear the clutter, delete old Docker Images
 	process = subprocess.Popen(['docker', 'images'], stdout=subprocess.PIPE)
-	Build_Images = process.communicate()	
+	build_images = process.communicate()	
 	try:
-		for i in range(1,len(Build_Images.split("\n"))):
-			Image=Build_Images.split('\n')[i].split()[2]
+		for i in range(1,len(build_images.split("\n"))):
+			docker_image=build_images.split('\n')[i].split()[2]
 
 			# Preserve important images used for building new images
-			if(Image not in ['8ac48589692a','efb6baa1169f','8357b3fcbe41','1b3de68a7ff8']):
-				subprocess.getoutput("docker rmi -f {image}".format(image = Image))
+			if(docker_image not in ['8ac48589692a','efb6baa1169f','8357b3fcbe41','1b3de68a7ff8']):
+				subprocess.getoutput("docker rmi -f {image}".format(image = docker_image))
 	except:
 		print ("")		
 
-def Process():
-	if (lang == "C" or lang == "CPP"):
-		 
-		CPP_File = PROGRAM_File + ".{lang}".format(lang = "c" if lang == "C" else "cpp")
-		Exec_Program = CPP_File.split('.')[0] + ".o"
+def CCPP(lang):
+		cpp_file = code_file + ".{lang}".format(lang = "c" if lang == "C" else "cpp")
+		cpp_executable = cpp_file.split('.')[0] + ".o"
 		
 		CPP_Program = """
 		#include <iostream>
@@ -41,42 +39,39 @@ def Process():
 		return 0;
 		}
 		"""
-		write_CPP_File = open("CPP_Files/" + CPP_File, "w")
-		write_CPP_File.write(CPP_Program)
-		write_CPP_File.close()
+		write_cpp_file = open("cpp_files/" + cpp_file, "w")
+		write_cpp_file.write(CPP_Program)
+		write_cpp_file.close()
 
 		
-		Write_Dockerfile = open("CPP_Files/"+ PROGRAM_File, "w")
+		write_dockerfile = open("cpp_files/"+ code_file, "w")
 
 		# Absolute path needed for COPY as Docker executes a cache file from a tmp dir 
 		Dockerfile = """
 	FROM gcc:4.9
-	COPY {CPP_File} /usr/src/mycpp/
+	COPY {cpp_file} /usr/src/mycpp/
 	WORKDIR /usr/src/mycpp
-	RUN {compile} -o {Exec_Program} {CPP_File}
-	CMD ["./{Exec_Program}"]
-		""".format(CPP_File = CPP_File, Exec_Program = Exec_Program, compile = "gcc" if lang == "C" else "g++")
+	RUN {compile} -o {cpp_executable} {cpp_file}
+	CMD ["./{cpp_executable}"]
+		""".format(cpp_file = cpp_file, cpp_executable = cpp_executable, compile = "gcc" if lang == "C" else "g++")
 
-		# Write the following Dockerfile contents to the location and file: [ "CPP_Files" + PROGRAM/File ]
-		Write_Dockerfile.write(Dockerfile)
-		Write_Dockerfile.close()
+		# Write the following Dockerfile contents to the location and file: [ "cpp_files" + PROGRAM/File ]
+		write_dockerfile.write(Dockerfile)
+		write_dockerfile.close()
 
-		call(["cd CPP_Files && docker build -t {label} -f {label} .".format(label = PROGRAM_File)],shell=True)
+		call(["cd cpp_files && docker build -t {label} -f {label} .".format(label = code_file)],shell=True)
 		
-		call(["gotty -w --term PaaS docker run -it --rm {label}:latest ".format(label = PROGRAM_File)],shell=True)
+		call(["gotty -w --term PaaS docker run -it --rm {label}:latest ".format(label = code_file)],shell=True)
+
+def Lang
+
+def Process():
+	if (lang == "C" or lang == "CPP"):
+		 
+
 		
 	elif (lang == "Python2" or lang == "Python3"):
-		# Python version to use in Dockerfile
-		ver = ("{ver}").format(ver = 2 if lang == "Python2" else "3")
-
-		# To use Python2 or 3 Docker container
-		Dockerfile = """
-		FROM python:{ver}
-		COPY {File} /usr/src/mypy
-		WORKDIR /usr/src/mypy
-		CMD ["{PyVer} {File}"]
-		""".format(File = File, ver = ver, PyVer = "Python2" if lang == "Python2" else "Python3")	
-		print (Dockerfile)
+		
 
 def ttyOverBrowser(port, docker_cmd):
 	subprocess.getoutput("ttyd -p {port} --once {cmd} &".format(port = port, cmd = docker_cmd))
