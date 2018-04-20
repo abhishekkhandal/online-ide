@@ -18,7 +18,7 @@ print"""
 
 <body>
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
-        <div class="container"><a class="navbar-brand logo" href="#">Platform as a Service</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand logo" href="#"><b>Platform as a Service</b></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div
                 class="collapse navbar-collapse" id="navbarNav">
                 <ul class="nav navbar-nav ml-auto">
@@ -31,7 +31,7 @@ print"""
         <section class="portfolio-block block-intro" style="height:100%;padding:22px;margin-bottom:20px;">
             <div class="container" style="margin-bottom:20px;">
                 <div class="about-me" style="width:100%;">
-                    <p>Code, Compile & Run</p>
+                    <p>Code, Compile & Run.</p>
                     <div class="form-group" style="margin:0px 32px 0px 32px;width:100%;">
                         <div class="table-responsive" style="height:100%;width:90%;">
                             <table class="table">
