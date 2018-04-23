@@ -29,10 +29,10 @@ def Docker_RMI():
 	# Stop all stopped containers
 	#Popen(['docker', 'rm', '$(docker ps -a -q)'])
 
-	# kill all running containers:
 	# TODO: kill containers running >= 1hr
+	# kill all running containers:
 	# docker ps | awk {' print $1 '} | tail -n+2 > tmp.txt; for line in $(cat killed-containers.txt); do docker kill $line; done;
-	
+
 	try:
 		for i in range(1,len(build_images.split("\n"))):
 			docker_image=build_images.split('\n')[i].split()[2]
