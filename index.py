@@ -29,7 +29,7 @@ print ("""
     </nav>
     <main class="page">
         <section class="portfolio-block block-intro" style="height:100%;padding:22px;margin-bottom:20px;">
-            <div class="container" style="margin-bottom:20px;">
+            <div class="container" style="margin-bottom:0px;">
                 <div class="about-me" style="width:100%;">
                     <p>Code, Compile & Run.</p>
                     <form action="docker.py" id="form" method="POST">
@@ -42,7 +42,7 @@ print ("""
                                             <div class="form-check"><input class="form-check-input" type="radio" name="lang" value="C" id="language" style="height:18px;"><label class="form-check-label" for="language">C</label></div>
                                         </th>
                                         <th>
-                                            <div class="form-check"><input class="form-check-input" type="radio" name="lang" value="CPP" id="language"><label class="form-check-label" for="language">C++</label></div>
+                                            <div class="form-check"><input class="form-check-input" type="radio" name="lang" value="CPP" id="language" checked><label class="form-check-label" for="language">C++</label></div>
                                         </th>
                                         <th style="margin:12px;padding:12px;">
                                             <div class="form-check"><input class="form-check-input" type="radio" name="lang" value="python2" disabled="" id="language"><label class="form-check-label" for="language">Python2</label></div>
@@ -63,6 +63,7 @@ print ("""
                                 </thead>
                             </table>
                         </div>
+                        <p style="font-size:14px;">Demo: Hit the <strong><b>Go</b></strong> button below.<br> Type <strong><b>./main</b></strong> and hit Enter.</p>
                     </div>
                 </div>
             </div>
@@ -94,7 +95,7 @@ print ("""
         $.ajax({
           type: "POST",
           url: "docker.py",
-          data: {"language": "CPP", "code" : code },
+          data: {"language": language, "code" : code },
           
           beforeSend: function(x) {
           if(x && x.overrideMimeType) {
