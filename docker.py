@@ -26,13 +26,13 @@ def Docker_RMI():
 	process = subprocess.Popen(['docker', 'images'], stdout=subprocess.PIPE)
 	build_images = process.communicate()
 
-	# Stop all stopped containers
-	#Popen(['docker', 'rm', '$(docker ps -a -q)'])
+	# Stop all stopped containers: docker rm $(docker ps -a -q)
 
 	# TODO: kill containers running >= 1hr
 	# kill all running containers and save the list in killed-containers.txt:
-	# docker ps | awk {' print $1 '} | tail -n+2 > tmp.txt; for line in $(cat killed-containers.txt); do docker kill $line; done;
-
+	# docker ps | awk {' print $1 '} | tail -n+2 > killed-containers.txt; for line in $(cat killed-containers.txt); do docker kill $line; done;
+	# Kill ttyd processes to release ports
+	# ps -e | grep ttyd | awk {' print $1 '} | tail -n+2 > ttyd.txt for line in $(cat ttyd.txt); do sudo kill $line; done;
 	try:
 		for i in range(1,len(build_images.split("\n"))):
 			docker_image=build_images.split('\n')[i].split()[2]
@@ -68,17 +68,17 @@ cout << "\\t    return 0;\\n";
 cout << "\\t}\\n\033[0m";
 cout << endl << endl;
 cout << "\033[7;36mInstructions:\033[0m";
-cout << "\n\t Type \033[1;36mls\033[0m to list all the file available.";
-cout << "\n\t Use \033[1;36mNANO\033[0m or \033[1;36mVIM\033[0m to edit file.";
-cout << "\n\t Eg. \'\033[1;36mnano main.cpp\033[0m\' (without quotes).";
-cout << "\n\t\t\033[1;36mctrl + x\033[0m to write changes made in the file.\n\t\tPress \033[1;36my\033[0m to save the file.";
-cout << "\n\t Compile it manually: \'\033[1;36mg++ main.cpp -o myprog\033[0m\'.";
-cout << "\n\t Execute: \'\033[1;36m./myprog\033[0m\'.\n\n";
-cout << "\n\033[1;32m>> \033[0mCode from the textarea is saved in \033[1m\033[4;34mmain.cpp\033[0m\033[0m and compiled to \033[1m\033[4;34mmyprog\033[0m\033[0m";
-cout << "\n\033[1;32m>> \033[0mEdit the code in  terminal \033[1m\033[4;34mnano main.cpp\033[0m\033[0m";
-cout << "\n\033[1;32m>> \033[0mRun the compiled program: \033[1m\033[4;34m./myprog\033[0m\033[0m\n\n\n";
-cout << "\033[1;37mEnjoy!\n";
-cout << "-Abhishek\033[0m\n\n";
+cout << "\\n\\t Type \033[1;36mls\033[0m to list all the file available.";
+cout << "\\n\\t Use \033[1;36mNANO\033[0m or \033[1;36mVIM\033[0m to edit file.";
+cout << "\\n\\t Eg. \'\033[1;36mnano main.cpp\033[0m\' (without quotes).";
+cout << "\\n\\t\t\033[1;36mctrl + x\033[0m to write changes made in the file.\\n\\t\tPress \033[1;36my\033[0m to save the file.";
+cout << "\\n\\t Compile it manually: \'\033[1;36mg++ main.cpp -o myprog\033[0m\'.";
+cout << "\\n\\t Execute: \'\033[1;36m./myprog\033[0m\'.\\n\\n";
+cout << "\\n\033[1;32m>> \033[0mCode from the textarea is saved in \033[1m\033[4;34mmain.cpp\033[0m\033[0m and compiled to \033[1m\033[4;34mmyprog\033[0m\033[0m";
+cout << "\\n\033[1;32m>> \033[0mEdit the code in  terminal \033[1m\033[4;34mnano main.cpp\033[0m\033[0m";
+cout << "\\n\033[1;32m>> \033[0mRun the compiled program: \033[1m\033[4;34m./myprog\033[0m\033[0m\\n\\n\\n";
+cout << "\033[1;37mEnjoy!";
+cout << "\\n-Abhishek\033[0m\\n\\n";
 return 0;
 }"""
 		write_code_file.write(program_code)
@@ -104,7 +104,7 @@ return 0;
 		launch_container = "docker run -itd --rm --stop-timeout 120 --name {container} gcc-nano && \
 		docker cp code_files/{codefile} {container}:/home/main.{ext} && \
 		docker exec {container} {compiler} main.{ext} -o {exec}".format(codefile = code_file,container = container_id, ext = ext, compiler = compiler, exec = executable_file)
-		web_shell = "ttyd -p {port} -r 2 -d 0 docker attach {container}".format(container = container_id, port = port)
+		web_shell = "ttyd -p {port} -r 2 -m 1 -d 0 docker attach {container}".format(container = container_id, port = port)
 		
 		# Execute the commands specified in the string commands above	
 		subprocess.Popen(launch_container, shell=True, close_fds=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
