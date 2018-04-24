@@ -1,5 +1,6 @@
 FROM gcc:7.3
+COPY how /usr/local/bin
 WORKDIR /home
 RUN apt-get update && \
-apt-get -y install nano vim && \
+apt-get -y install apt-utils nano vim libc6-dev && \
 rm -rf /var/lib/apt/lists/*
