@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-import cgi
+import cgi,cgitb
 import random
 import json
-
+cgitb.enable()
 global subprocess
 import subprocess
 
@@ -83,7 +83,7 @@ return 0;
 		docker cp code_files/{codefile} {container}:/home/main.{ext} && \
 		docker exec {container} {compiler} main.{ext} -o main".format(codefile = code_file,container = container_id, ext = ext, compiler = compiler)
 		web_shell = "ttyd -p {port} -r 2 -d 0 docker attach {container}".format(container = container_id, port = port)
-
+		
 		subprocess.Popen(launch_container, shell=True, close_fds=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 		subprocess.Popen(web_shell, shell=True, close_fds=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 		
