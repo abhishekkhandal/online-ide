@@ -22,66 +22,100 @@ print ("""
             <div
                 class="collapse navbar-collapse" id="navbarNav">
                 <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="https://localhost:12345" target="_blank">Geek Stats</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="https://github.com/abhishekkhandal/online-ide.git" target="_blank">GitHub Repo</a></li>
                 </ul>
         </div>
         </div>
     </nav>
     <main class="page">
-        <section class="portfolio-block block-intro" style="height:100%;padding:22px;margin-bottom:20px;">
-            <div class="container" style="margin-bottom:0px;">
+        <section class="portfolio-block block-intro" style="height:100%;padding:16px;margin-bottom:12px;">
+            <div class="container" style="display: flex; justify-content: center;">
                 <div class="about-me" style="width:100%;">
                     <p>Code, Compile & Run.</p>
                     <form action="docker.py" id="form" method="POST">
-                    <div class="form-group" style="margin:0px 32px 0px 32px;width:100%;">
-                        <div class="table-responsive" style="height:100%;width:90%;">
-                            <table class="table">
-                                <thead style="height:100%;width:100%;">
-                                    <tr style="background-color:rgba(136,123,130,0.08);height:100%;width:100%;">
-                                        <th>
-                                            <div class="form-check"><input class="form-check-input" type="radio" name="lang" value="C" id="language" style="height:18px;"><label class="form-check-label" for="language">C</label></div>
-                                        </th>
-                                        <th>
-                                            <div class="form-check"><input class="form-check-input" type="radio" name="lang" value="CPP" id="language" checked><label class="form-check-label" for="language">C++</label></div>
-                                        </th>
-                                        <th style="margin:12px;padding:12px;">
-                                            <div class="form-check"><input class="form-check-input" type="radio" name="lang" value="python2" disabled="" id="language"><label class="form-check-label" for="language">Python2</label></div>
-                                        </th>
-                                        <th>
-                                            <div class="form-check"><input class="form-check-input" type="radio" name="lang" value="python3" disabled="" id="language"><label class="form-check-label" for="language">Python3</label></div>
-                                        </th>
-                                        <th>
-                                            <div class="form-check"><input class="form-check-input" type="radio" name="lang" value="php" disabled="" id="language"><label class="form-check-label" for="language">PHP</label></div>
-                                        </th>
-                                        <th>
-                                            <div class="form-check"><input class="form-check-input" type="radio" name="lang" value="go" disabled="" id="language"><label class="form-check-label" for="language">Go</label></div>
-                                        </th>
-                                        <th>
-                                            <div class="form-check"><input class="form-check-input" type="radio" name="lang" value="java8" disabled="" id="language"><label class="form-check-label" for="language">Java8</label></div>
-                                        </th>
-                                    </tr>
-                                </thead>
-                            </table>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons"" style="margin:0px 32px 0px 32px;width:100%;">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                          <label class="btn btn-outline-primary active">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> C
+                          </label>
+                          <label class="btn btn-outline-primary">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> C++
+                          </label>
+                          <label class="btn btn-outline-primary">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> Python 2/3
+                          </label>
+                          <label class="btn btn-outline-primary">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> Fortran
+                          </label>
+                          <label class="btn btn-outline-primary">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> Go
+                          </label>
+                          <label class="btn btn-outline-primary">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> Java
+                          </label>
+                          <label class="btn btn-outline-primary">
+                            <input type="radio" name="options" id="option3" autocomplete="off"> Radio
+                          </label>
                         </div>
-                        <p style="font-size:14px;">Demo: Hit the <strong><b>Go</b></strong> button below.<br> Type <strong><b>./main</b></strong> and hit Enter.</p>
+
+
+                        
+                        
                     </div>
+                    <p style="font-size:14px;"><u>Help:</u> Hit the <strong><b>Go</b></strong> button below.<br> Use <strong><b>howto</b></strong> command to display instructions.</p>
                 </div>
             </div>
         </section>
     </main>
     <div class="gradient">
         <div class="container">
-            <div class="row" style="margin:0% 0% 0% 0%;" id="iframe">
-                <div class="col" style="width:100%;height:100%;margin:5% 0% 5% 0%;"><textarea id="codeArea" style="width:100%;height:500px;padding:2px 2px 0px 2px;" id="inp" ></textarea></div>
-                <div class="col-md-6" style="margin:5% 0% 5% 0%;width:100%;height:100%;"><iframe id="codeOutput" name="codeOutput" src="#" style="width:100%;height:500px"></iframe></div>
+        <div class="row" style=" align-items: center; justify-content: center;">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Total Characters</th>
+                                    <th>Total Word</th>
+                                    <th>Total Lines</th>
+                                    <th>Size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="char_count">0</td>
+                                    <td id="word_count">0</td>
+                                    <td id="line_count">0</td>
+                                    <td id="byte_count">0</td>
+                                </tr>
+                                <tr></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col">
+                <button class="btn btn-primary" type="submit">GO</button>
             </div>
-                <button class="btn btn-primary" type="submit" style="font-size:18px;margin:0% 0% 5% 45%;padding:6px 28px;width:100px;">GO</button>
+                </div>
+            </div>
+            <div class="row" style="display: flex; align-items: center; justify-content: center;">
+                <div class="col" style="width:100%;height:100%;margin:5% 0% 5% 0%;"><textarea id="codeArea" wrap="physical" onFocus="window.scrollTo(0, 0);" placeholder="#include <iostream>
+using namespace std;
+
+int main() 
+{
+    cout << 'Hello, World!';
+    return 0;
+}" style="width:100%;height:500px;padding:2px 2px 0px 2px;" style="width:100%;height:500px;padding:2px 2px 0px 2px;" autofocus></textarea></div>
+                <div class="col" style="height:500px;"><iframe id="codeOutput" name="codeOutput" src="matrix.html" style="width:100%;height:100%"></iframe></div>
+            </div>
+            
         </div>
+
     </div>
     </form>
     <footer class="page-footer">
         <div class="container">
-            <div class="links"><a href="#">About me</a><a href="#">Contact me</a><a href="#">Projects</a></div>
             <div class="social-icons"><a href="https://www.linkedin.com/in/abhishekkhandal/" target="_blank"><i class="icon ion-social-linkedin"></i></a><a href=""><i class="icon ion-social-github"></i></a><a href="mailto:akhandal69@gmail.com"><i class="icon ion-email"></i></a></div>
         </div>
     </footer>
@@ -115,6 +149,52 @@ print ("""
     
     return false;
     });
+
+    $('#codeArea').keyup(function() {
+      // count total chars
+      var text = $(this).val()
+      var length = text.length;
+      $('#char_count').text(length);
+      
+      // count total words
+      var words = $.trim(this.value).length ? this.value.match(/\S+/g).length : 0;
+      $('#word_count').text(words);
+      
+      // count total lines
+      var lines = $("#codeArea").val().split(/\\r|\\r\\n|\\n/);
+      var count_lines = lines.length;
+      $('#line_count').text(count_lines);
+
+      // count total bytes, UTF-16
+      var bytes = 0,
+      chars = (text.match(/[\\uD800-\\uDBFF][\\uDC00-\\uDFFF]|[^]/g)||[]).length,
+      bytes = text.length * 2;
+    $('#byte_count').text(bytes + " B");
+      
+    });
+
+
+function getUTF8Length(s) {
+  var len = 0;
+  for (var i = 0; i < s.length; i++) {
+    var code = s.charCodeAt(i);
+    if (code <= 0x7f) {
+      len += 1;
+    } else if (code <= 0x7ff) {
+      len += 2;
+    } else if (code >= 0xd800 && code <= 0xdfff) {
+      // Surrogate pair: These take 4 bytes in UTF-8 and 2 chars in UCS-2
+      // (Assume next char is the other [valid] half and just skip it)
+      len += 4; i++;
+    } else if (code < 0xffff) {
+      len += 3;
+    } else {
+      len += 4;
+    }
+  }
+  return len;
+}
+
     </script>
     
 </body>
