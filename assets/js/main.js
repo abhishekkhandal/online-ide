@@ -6,7 +6,7 @@ $("#form").submit(function() {
   type: "POST",
   url: "docker.py",
   data: {
-   "language": language,
+   "language": "CPP",
    "code": code
   },
 
@@ -37,9 +37,8 @@ $('#codeArea').keyup(function() {
  $('#word_count').text(words);
 
  // count total lines
- var lines = $("#codeArea").val().split(/\\r|\\r\\n|\\n/);
- var count_lines = lines.length;
- $('#line_count').text(count_lines);
+ var lines = text.split(/\r|\r\n|\n/);
+ $('#line_count').text(lines.length);
 
  // count total bytes, UTF-16
  var bytes = 0,
